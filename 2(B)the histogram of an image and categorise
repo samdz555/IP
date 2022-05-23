@@ -1,0 +1,13 @@
+% Program to plot the histogram of an image and categorise
+% Program to apply histogram equalization.
+clc
+clear all
+close all
+% a=imread('tire.tif')
+a=imread('C:\Users\Sameer Dhotre\Desktop\rolls-royce-ghost.jpg');
+% Perform histogram equalization
+b=histeq(a);
+subplot(2,2,1),imshow(a),title('original image'),
+subplot(2,2,2),imshow(b),title('After histogram equalization'),
+subplot(2,2,3),imhist(a),title('original histogram')
+subplot(2,2,4),imhist(b),title('After histogram equalization')
