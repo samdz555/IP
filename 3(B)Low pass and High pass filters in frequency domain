@@ -1,0 +1,43 @@
+%Lowpass filter for Butterworth%
+ 
+%This code is used to Butterworth lowpass filter
+close all;
+clear all;
+clc;
+im=imread('pout.tif');
+im1=imnoise(im,'salt & pepper',0.05);
+subplot(4,3,1);
+imshow(im1);
+fc=20;
+% Cutoff frequency
+n=1;
+[co,ro] = size(im);
+cx = round(co/2);
+% find the center of the image
+cy = round (ro/2);
+imf=fftshift(fft2(im1));
+
+subplot(4,3,2);
+imshow(imf);
+H=zeros(co,ro);
+for i = 1:co
+    for j =1 : ro
+        d = (i-cx).^2 + (j-cy).^ 2;
+        H(i,j) = 1/(1+((d/fc/fc).^(2*n)));
+    end
+end
+subplot(4,3,3);
+imshow(H);
+subplot(4,3,4);
+mesh(H);
+outf = imf .* H;
+out = abs(ifft2(outf));
+subplot(3,3,5);
+imshow(outf);
+title('F(u,v)*H(u,v)');
+subplot(3,3,6);
+imshow(im1);
+title('Original Image');
+subplot(4,3,7);
+imshow(uint8(out));
+title('Lowpass Filterd Image');
