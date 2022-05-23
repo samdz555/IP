@@ -1,0 +1,132 @@
+% Program to perform Basic Intensity Transformation functions:
+clc;
+close all;
+clear all;
+%Read Input Image
+a=imread('C:\Users\Sameer Dhotre\Desktop\lamborghini1.jpg');
+figure(1);
+imshow(a);
+title('original image');
+%negative image
+%b=rgb2gray(a);
+%figure(2);
+%imshow(b);
+b=255-a;
+figure(3);
+imshow(b);
+title('negative image');
+%log transform
+l=255;
+d=l/log10(1+l);
+e=d*log10(1+double(a));
+f=uint8(e);
+figure(4);
+imshow(f);
+title('log transform');
+%power law transform
+gamma=1.1;
+g=double(a).^gamma;
+figure(5);
+imshow(uint8(g));
+title('power law transform');
+%image thresholding
+[r,c] = size(a);
+Thre = input('Enter the value of Thr =');
+for i = 1:r
+for j=1:c
+if (a(i,j)>Thre)
+Out(i,j) = 1;
+else
+Out(i,j) = 0;
+end
+end
+end
+subplot(121),imshow(a); title('Input Image');
+subplot(122),imshow(Out); title('Threshold Image');
+%Contrast stretching (using inbuilt functions)
+a=imread('pout.tif');
+s=imadjust(a,stretchline(a,[]));
+subplot(221),imshow(a); title('Input Image');
+subplot(222),imshow(s); title('Stretched Image');
+subplot(223),imhist(a); title('Hist of Input Image');
+subplot(224),imhist(Out); title(' Hist ofThreshold Image');
+%Contrast stretching
+r=imread('pout.tif');
+[m,n] = size(r);
+r1 = input('enter r1 : ');
+r2 = input('enter r2 : ');
+s1 = input('enter s1 : ');
+s2 = input('enter s2 : ');
+a= s1/r1;
+b= (s2-s1)/(r2-r1);
+c= (255-s2)/(255-r2);
+for i = 1:m
+for j=1:n
+if r(i,j) < r1
+s(i,j) = a*r(i,j);
+elseif r(i,j) < r2
+s(i,j) = b*(r(i,j)-r1)+s1;
+else
+s(i,j) = c*(r(i,j)-r2)+s2;
+end
+end
+end
+figure; imshow(uint8(r));
+title('original img');
+figure; imshow(uint8(s));
+title('cintrast stretching img');
+%intensity slicing without background
+p = imread('skull.tif');
+z = double(p);
+[r,c] = size(z);
+for i = 1:1:r
+for j=1:1:c
+if ((z(i,j) > 50)) && (z(i,j) < 150)
+z(i,j) = 255;
+else
+z(i,j) = ('');
+end
+end
+end
+figure (1); imshow((p));
+title('original img');
+figure(2); imshow(uint8(z));
+title('intensity slicing without BG');
+%intensity slicing with background
+p = imread('skull.tif');
+z = double(p);
+[r,c] = size(z);
+for i = 1:1:r
+for j=1:1:c
+if ((z(i,j) > 50)) && (z(i,j) < 150)
+z(i,j) = 255;
+else
+z(i,j) = p(i,j);
+end
+end
+end
+figure (1); imshow(p);
+title('original img');
+figure(2); imshow(uint8(z));
+title('intensity slicing with BG');
+%bit plane extraction
+a = imread('warne.tif');
+a = double(a);
+[r,c] = size(a);
+I = input('enter bit image you want to see 1= MSB 8= LSB');
+for i = 1:1:r
+for j=1:1:c
+c = dec2bin(a(x,y),8);
+d = c(I);w2
+if ((z(i,j) > 50)) && (z(i,j) < 150)
+z(i,j) = 255;
+else
+z(i,j) = p(i,j);
+end
+end
+end
+figure (1); imshow(p);
+title('original img');
+figure(2); imshow(uint8(z));
+title('intensity slicing with BG');
+
