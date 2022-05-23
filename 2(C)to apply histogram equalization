@@ -1,0 +1,18 @@
+A=imread('tire.tif');
+subplot(1,3,1);
+imshow(A);
+%Specify the bin range (0,255)
+bin  = 255;
+%Find the histogram of image
+val = reshape(A, [], 1);
+val = double(val);
+I=hist(val,0:bin);
+output = I/(numel(A));
+%Calculate cumalative sum
+CSum = cumsum(output);
+%Perform the transformation s=T(R) where s & R in range[0,1]
+HIm=CSum(A+1);
+%Convert to image into int 8
+HIm = uint8(HIm*bin);
+subplot(1,3,2);
+imshow(HIm);
