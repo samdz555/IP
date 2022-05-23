@@ -41,3 +41,9 @@ title('Original Image');
 subplot(4,3,7);
 imshow(uint8(out));
 title('Highpass Filterd Image');
+
+
+
+
+
+
