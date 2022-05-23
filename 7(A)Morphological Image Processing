@@ -31,3 +31,11 @@ g = bwmorph(b,'bothat');
 subplot(2,3,6);
 imshow(g);
 title('bottom hat operation on original image');
+
+
+
+
+
+
+
+
