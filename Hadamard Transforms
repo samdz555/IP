@@ -17,3 +17,11 @@ B=1/256*H256*A*H256;
 subplot(1,3,2),imshow(B),title('hadamard of the input image');
 A=1/256*H256'*B*H256';
 subplot(1,3,3),imshow(A),title('Input Image obtained by inverse transform');
+
+
+
+
+
+
+
+
